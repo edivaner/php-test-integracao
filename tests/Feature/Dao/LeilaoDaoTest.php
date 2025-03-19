@@ -70,6 +70,29 @@ class LeilaoDaoTest extends TestCase{
         self::assertContainsOnlyInstancesOf(Leilao::class, $leiloes);
     }
 
+    public function testAoAtualizarLeilaoStatusDeveSerAlterado(){
+        $leilao = new Leilao('Brasilia Amarela');
+        $leilaoDao = new LeilaoDao(self::$pdo);
+        $leilaoSalvo = $leilaoDao->salva($leilao);
+        
+        $leiloesNaoFinalizados = $leilaoDao->recuperarNaoFinalizados();
+        self::assertCount(1, $leiloesNaoFinalizados);
+        self::assertEquals('Brasilia Amarela', $leiloesNaoFinalizados[0]->recuperarDescricao());
+        self::assertFalse($leiloesNaoFinalizados[0]->estaFinalizado());
+
+        $leilaoSalvo->finaliza();
+        $leilaoDao->atualiza($leilaoSalvo);
+
+        $leiloesFinalizados = $leilaoDao->recuperarFinalizados();
+        self::assertCount(1, $leiloesFinalizados);
+        self::assertEquals('Brasilia Amarela', $leiloesFinalizados[0]->recuperarDescricao());
+        self::assertTrue($leiloesFinalizados[0]->estaFinalizado());
+    }
+
+
+    /**
+     *  Função do data provider
+     */
     public static function leiloes()
     {
         $naoFinalizado = new Leilao('Variante 0Km');

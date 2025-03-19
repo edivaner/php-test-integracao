@@ -2,10 +2,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.0/phpunit.xsd"
         bootstrap="vendor/autoload.php"
-        colors="true">
+        colors="true"
+        testdox="true">
     <testsuites>
-        <testsuite name="Testes de unidade">
-            <directory>tests</directory>
+        <testsuite name="unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="feature">
+            <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
 
