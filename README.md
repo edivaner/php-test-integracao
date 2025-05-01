@@ -21,3 +21,9 @@ Iniciar o repositorio e executar os testes
 ´
     ./vendor/bin/phpunit tests/Feature/Dao/LeilaoDaoTest.php --filter=testBuscaLeiloesFinalizados
 ´
+
+# Atenção
+* Neste repositório tem um teste de integração com API, é apenas uma simulação. O arquivo rest.php simula a resposta de uma API.
+    Para funcionar todos os testes corretamente, deve subir um servidor.
+    ` php -S localhost:8080 `
+
